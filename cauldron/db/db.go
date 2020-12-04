@@ -1,5 +1,6 @@
 package db
 
-func getData() {
+// GetData gets data
+func GetData() {
 
 }
