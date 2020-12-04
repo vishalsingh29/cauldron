@@ -1,7 +1,6 @@
 package main
 
 import (
-	"cauldron/db"
 	"fmt"
 	"net/http"
 )
@@ -12,7 +11,7 @@ func handlerTest(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	fmt.Println("main init: listening on 8080")
+	fmt.Println("does it work?")
 	http.HandleFunc("/", handlerTest)
 	http.ListenAndServe(":8080", nil)
-	db.GetData()
 }
