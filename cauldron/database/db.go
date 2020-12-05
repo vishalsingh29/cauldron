@@ -8,6 +8,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var mysqlDB *sql.DB
+
 // Init initializes data
 func Init() {
 	mysqlDB, err := sql.Open("mysql", "root:zhomsg3d@tcp(127.0.0.1:3306)/cauldron")
@@ -17,4 +19,9 @@ func Init() {
 	mysqlDB.SetConnMaxLifetime(time.Minute * 3)
 	mysqlDB.SetMaxOpenConns(10)
 	mysqlDB.SetMaxIdleConns(10)
+}
+
+// Stop database
+func Stop() {
+	mysqlDB.Close()
 }

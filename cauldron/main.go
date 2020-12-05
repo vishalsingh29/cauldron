@@ -16,4 +16,5 @@ func main() {
 	fmt.Println("does it work?")
 	http.HandleFunc("/", handlerTest)
 	http.ListenAndServe(":8080", nil)
+	defer database.Stop()
 }
