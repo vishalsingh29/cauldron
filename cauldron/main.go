@@ -3,12 +3,19 @@ package main
 import (
 	"cauldron/config"
 	"cauldron/database"
+	"cauldron/users"
 	"fmt"
 	"net/http"
 )
 
 func handlerTest(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "works")
+	user, err := users.Create("vishal", "vishal.singh@lucifer.com")
+	if err != nil {
+		fmt.Println(fmt.Errorf("Error creating a user %v", err))
+		return
+	}
+	fmt.Println(user.Name, user.Email, " created")
 }
 
 func main() {
