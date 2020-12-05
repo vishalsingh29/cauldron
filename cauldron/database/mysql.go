@@ -1,18 +1,23 @@
 package database
 
 import (
+	"cauldron/config"
 	"database/sql"
+	"fmt"
 	"time"
 
 	// database sql package is used by mysql driver
 	_ "github.com/go-sql-driver/mysql"
 )
 
+const mysql = "mysql"
+
 var mysqlDB *sql.DB
 
 // Init initializes data
-func initMySQL() {
-	mysqlDB, err := sql.Open("mysql", "root:zhomsg3d@tcp(127.0.0.1:3306)/cauldron")
+func initMySQL(conf *config.MySQLConfig) {
+	mysqlURI := fmt.Sprintf("%s:%s@tcp(%s)/%s", conf.Username, conf.Password, conf.Hostname, conf.DBName)
+	mysqlDB, err := sql.Open(mysql, mysqlURI)
 	if err != nil {
 		panic(err)
 	} // See "Important settings" section.

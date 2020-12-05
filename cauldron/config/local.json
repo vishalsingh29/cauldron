@@ -1,0 +1,9 @@
+{
+    "mysql": {
+        "password": "zhomsg3d",
+        "port": "3306",
+        "hostname": "127.0.0.1",
+        "username": "root",
+        "dbname": "cauldron"
+    }
+}
