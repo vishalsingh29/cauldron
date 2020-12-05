@@ -1,9 +1,9 @@
 {
     "mysql": {
-        "password": "zhomsg3d",
+        "password": "",
         "port": "3306",
         "hostname": "127.0.0.1",
-        "username": "root",
+        "username": "philip",
         "dbname": "cauldron"
     }
 }

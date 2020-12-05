@@ -8,14 +8,25 @@ import (
 	"net/http"
 )
 
+func doNothing(w http.ResponseWriter, r *http.Request) {}
+
 func handlerTest(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "works")
-	user, err := users.Create("vishal", "vishal.singh@lucifer.com")
+	allUsers, err := users.GetAllUsers()
+	fmt.Println("len users ", len(allUsers))
 	if err != nil {
-		fmt.Println(fmt.Errorf("Error creating a user %v", err))
+		fmt.Println(fmt.Errorf("Error getting a user %v", err))
 		return
 	}
-	fmt.Println(user.Name, user.Email, " created")
+	err = users.Create("vishalsingh", "vishalrsingh@google.com")
+	if err != nil {
+		fmt.Println("err = ", err)
+	}
+	output := ""
+	for _, v := range allUsers {
+		output += fmt.Sprintf("%s, %s\n", v.Name, v.Email)
+		fmt.Println(v.Name, v.Email, "here ")
+	}
+	fmt.Fprintf(w, output)
 }
 
 func main() {
@@ -26,10 +37,10 @@ func main() {
 
 	// init database
 	database.InitAll(&config.Config.MySQL)
-
+	http.HandleFunc("/favicon.ico", doNothing)
 	http.HandleFunc("/", handlerTest)
 	http.ListenAndServe(":8080", nil)
 
 	// stop database
-	defer database.StopAll()
+	// defer database.StopAll()
 }
